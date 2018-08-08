@@ -1,0 +1,3 @@
+rootProject.name = 'HourlyMe'
+
+include ':app'
