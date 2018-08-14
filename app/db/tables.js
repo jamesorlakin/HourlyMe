@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, BaseEntity } from 'typeorm/browser'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm/browser'
 
 @Entity()
-export class Organisation extends BaseEntity {
-
+export class Organisation {
     /** @type {number} */
     @PrimaryGeneratedColumn()
     id = undefined
@@ -15,15 +14,17 @@ export class Organisation extends BaseEntity {
     @Column('varchar')
     colour = undefined
 
+    /** @type {string} */
+    @Column('varchar')
+    telephone = undefined
+
     /** @type {Hours[]} */
     @OneToMany(() => Hours, hours => hours.organisation)
     hours = undefined
-
 }
 
 @Entity()
-export class Hours extends BaseEntity {
-
+export class Hours {
     @PrimaryGeneratedColumn()
     id = undefined
 
@@ -44,5 +45,4 @@ export class Hours extends BaseEntity {
 
     @ManyToOne(() => Organisation, organisation => organisation.hours)
     organisation = undefined
-
 }

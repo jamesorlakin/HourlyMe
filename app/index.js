@@ -1,8 +1,9 @@
+// Possibly also show onboarding screens here.
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
-import Navigation from './navigation'
-import getDB from './db'
+import OrganisationsSelect from './screens/organisations/index'
+import connectDB from './db/init'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -13,15 +14,15 @@ export default class App extends React.Component {
   }
 
   async componentDidMount () {
-    await getDB()
+    await connectDB()
     this.setState({DBConnected: true})
   }
 
   render () {
-    if (!this.state.DBConnected) return null
+    if (!this.state.DBConnected) return <Text>DB Connecting</Text>
     return (
       <View style={{ flex: 1 }}>
-        <Navigation />
+        <OrganisationsSelect />
       </View>
     )
   }
