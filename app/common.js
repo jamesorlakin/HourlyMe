@@ -16,3 +16,11 @@ export function LargeText (props) {
     </Text>
   )
 }
+
+export function Bold (props) {
+  return (
+    <Text style={{fontWeight: 'bold'}}>
+      {props.children}
+    </Text>
+  )
+}

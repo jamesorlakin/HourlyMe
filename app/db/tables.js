@@ -25,24 +25,35 @@ export class Organisation {
 
 @Entity()
 export class Hours {
+    /** @type {number} */
     @PrimaryGeneratedColumn()
     id = undefined
 
+    /** @type {string} */
     @Column('varchar')
     workDescription = ''
 
+    /** @type {Date} */
     @Column('datetime')
     startTime = undefined
 
+    /** @type {Date} */
     @Column('datetime')
     endTime = undefined
 
+    /** @type {number} */
     @Column('double')
-    rate = undefined
+    hourlyRate = undefined
 
+    /** @type {number} */
+    @Column('double')
+    hoursUnpaid = undefined
+
+    /** @type {boolean} */
     @Column('boolean')
     isPaid = false
 
+    /** @type {Organisation} */
     @ManyToOne(() => Organisation, organisation => organisation.hours)
     organisation = undefined
 }
