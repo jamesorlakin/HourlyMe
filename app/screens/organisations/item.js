@@ -9,9 +9,9 @@ import { Organisation } from '../../db/tables'
  */
 export default function Item ({organisation, reloadList, onOrganisationSelected}) {
   return (
-    <View style={{borderWidth: 2}}>
-      <View style={{height: 16, width: 16, backgroundColor: organisation.colour}} />
-      <Text>{JSON.stringify(organisation)}</Text>
+    <View style={{borderWidth: 2, padding: 4, flexDirection: 'row'}}>
+      <View style={{height: 24, width: 24, alignSelf: 'center', backgroundColor: organisation.colour}} />
+      <Text style={{flex: 1, fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginLeft: 8}}>{organisation.name}</Text>
       <Button title='Select' onPress={() => { onOrganisationSelected(organisation) }} />
       <Button disabled title='Delete' onPress={async () => { await getRepository(Organisation).remove(organisation); reloadList() }} />
     </View>

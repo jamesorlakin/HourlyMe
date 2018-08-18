@@ -1,59 +1,75 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm/browser'
+import moment from 'moment'
 
-@Entity()
+@Entity('organisation')
 export class Organisation {
-    /** @type {number} */
-    @PrimaryGeneratedColumn()
-    id = undefined
+  /** @type {number} */
+  @PrimaryGeneratedColumn()
+  id = undefined
 
-    /** @type {string} */
-    @Column('varchar')
-    name = undefined
+  /** @type {string} */
+  @Column('varchar')
+  name = undefined
 
-    /** @type {string} */
-    @Column('varchar')
-    colour = undefined
+  /** @type {string} */
+  @Column('varchar')
+  colour = undefined
 
-    /** @type {string} */
-    @Column('varchar')
-    telephone = undefined
+  /** @type {string} */
+  @Column('varchar')
+  telephone = undefined
 
-    /** @type {Hours[]} */
-    @OneToMany(() => Hours, hours => hours.organisation)
-    hours = undefined
+  /** @type {Hours[]} */
+  @OneToMany(() => Hours, hours => hours.organisation)
+  hours = undefined
 }
 
-@Entity()
+@Entity('hours')
 export class Hours {
-    /** @type {number} */
-    @PrimaryGeneratedColumn()
-    id = undefined
+  constructor () {
+    this.calculatePaidHours = this.calculatePaidHours.bind(this)
+    this.calculatePayment = this.calculatePayment.bind(this)
+  }
 
-    /** @type {string} */
-    @Column('varchar')
-    workDescription = ''
+  /** @type {number} */
+  @PrimaryGeneratedColumn()
+  id = undefined
 
-    /** @type {Date} */
-    @Column('datetime')
-    startTime = undefined
+  /** @type {string} */
+  @Column('varchar')
+  workDescription = ''
 
-    /** @type {Date} */
-    @Column('datetime')
-    endTime = undefined
+  /** @type {Date} */
+  @Column('datetime')
+  startTime = undefined
 
-    /** @type {number} */
-    @Column('double')
-    hourlyRate = undefined
+  /** @type {Date} */
+  @Column('datetime')
+  endTime = undefined
 
-    /** @type {number} */
-    @Column('double')
-    hoursUnpaid = undefined
+  /** @type {number} */
+  @Column('double')
+  hourlyRate = undefined
 
-    /** @type {boolean} */
-    @Column('boolean')
-    isPaid = false
+  /** @type {number} */
+  @Column('double')
+  hoursUnpaid = undefined
 
-    /** @type {Organisation} */
-    @ManyToOne(() => Organisation, organisation => organisation.hours)
-    organisation = undefined
+  /** @type {boolean} */
+  @Column('boolean')
+  isPaid = false
+
+  /** @type {Organisation} */
+  @ManyToOne(() => Organisation, organisation => organisation.hours)
+  organisation = undefined
+
+  calculatePaidHours () {
+    var hours = moment(this.endTime).diff(this.startTime, 'hours', true)
+    return hours - this.hoursUnpaid
+  }
+
+  calculatePayment () {
+    var paidHours = this.calculatePaidHours()
+    return paidHours * this.hourlyRate
+  }
 }

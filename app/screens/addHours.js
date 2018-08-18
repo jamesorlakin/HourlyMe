@@ -64,6 +64,7 @@ export default class AddHoursScreen extends React.Component {
     newHours.isPaid = this.state.isPaid
 
     await getRepository(Hours).save(newHours)
+    alert('Saved')
     /*this.props.navigation.goBack()
     this.props.navigation.getParam('reloadList')()*/
   }
@@ -105,7 +106,6 @@ export default class AddHoursScreen extends React.Component {
     if (this.state.startTime > this.state.endTime) issues.push('End cannot be before start!')
     if (this.state.hourlyRate === undefined) issues.push('Hourly rate has not been configured')
     if (this.state.hoursUnpaid < 0) issues.push('Unpaid hours cannot be negative')
-    console.log(issues)
     return issues
   }
 }

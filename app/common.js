@@ -1,10 +1,12 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 
 export function Container (props) {
   return (
-    <ScrollView style={{margin: 4, padding: 8, flex: 1, borderColor: 'gray', borderWidth: 2}}>
-      {props.children}
+    <ScrollView>
+      <View style={{margin: 4, padding: 8, flex: 1, borderColor: 'gray', borderWidth: 2}} >
+        {props.children}
+      </View>
     </ScrollView>
   )
 }

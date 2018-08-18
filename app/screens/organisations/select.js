@@ -1,9 +1,10 @@
 // List all organisations, allow the user to choose or manage them.
 import React from 'react'
-import { Button } from 'react-native'
+import { View, Button } from 'react-native'
 import { Container, LargeText } from '../../common'
 
 import Item from './item'
+import HoursCalendar from './calendar'
 
 import { getRepository } from 'typeorm/browser'
 import { Organisation } from '../../db/tables'
@@ -13,11 +14,13 @@ export default class OrganisationsScreen extends React.Component {
     return {
       title: 'Hourly Me',
       headerRight: (
-        <Button
-          onPress={() => { navigation.navigate('new', {reloadList: navigation.getParam('reloadList')}) }}
-          title='+'
-          color='#000'
-        />
+        <View style={{marginRight: 10}}>
+          <Button
+            onPress={() => { navigation.navigate('new', {reloadList: navigation.getParam('reloadList')}) }}
+            title='+'
+            color='#000'
+          />
+        </View>
       )
     }
   }
@@ -56,6 +59,7 @@ export default class OrganisationsScreen extends React.Component {
           return <Item key={org.id} organisation={org} reloadList={reloadList} onOrganisationSelected={onOrganisationSelected} />
         })}
         {this.state.organisations.length === 0 && <LargeText style={{textAlign: 'center'}}>No organisations!</LargeText>}
+        <HoursCalendar />
       </Container>
     )
   }

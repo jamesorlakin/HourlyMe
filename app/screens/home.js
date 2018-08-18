@@ -5,7 +5,6 @@ import { Container } from '../common'
 import { getRepository } from 'typeorm/browser'
 import { Organisation, Hours } from '../db/tables'
 
-import { Calendar } from 'react-native-calendars'
 import AddHoursScreen from './addHours'
 
 export default class HomeScreen extends React.Component {
@@ -33,7 +32,6 @@ export default class HomeScreen extends React.Component {
       <Container>
         <AddHoursScreen organisation={organisation} />
         <Text>{JSON.stringify(this.props)}</Text>
-        <Calendar />
       </Container>
     )
   }
