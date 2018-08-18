@@ -3,7 +3,7 @@ import React from 'react'
 import { View, Button } from 'react-native'
 import { Container, LargeText } from '../../common'
 
-import Item from './item'
+import Item from './orgItem'
 import HoursCalendar from './calendar'
 
 import { getRepository } from 'typeorm/browser'
