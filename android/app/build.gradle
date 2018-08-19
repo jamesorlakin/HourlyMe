@@ -139,7 +139,6 @@ android {
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile project(':react-native-sqlite-storage')
-    compile project(':react-native-file-picker')
     compile "com.android.support:appcompat-v7:26.1.0"
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
