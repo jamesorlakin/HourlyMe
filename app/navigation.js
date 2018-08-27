@@ -1,21 +1,21 @@
-import { createTabNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 
 import HomeScreen from './screens/home'
-import HoursScreen from './screens/hours'
-import OrganisationsScreen from './screens/organisations'
+import OrgManagementScreen from './screens/orgManagement'
+import NewOrganisationScreen from './screens/organisations/new'
+import AddHoursScreen from './screens/addHours'
 
-const screens = {
+export default createStackNavigator({
   home: {
     screen: HomeScreen
   },
-  hours: {
-    screen: HoursScreen
+  manage: {
+    screen: OrgManagementScreen
   },
-  organisations: {
-    screen: OrganisationsScreen
+  addHours: {
+    screen: AddHoursScreen
+  },
+  new: {
+    screen: NewOrganisationScreen
   }
-}
-
-const Navigation = createTabNavigator(screens)
-
-export default Navigation
+})

@@ -9,16 +9,12 @@ import moment from 'moment'
 import { getRepository } from 'typeorm/browser'
 import { Organisation, Hours } from '../db/tables'
 
-/**
- * @typedef {object} Props
- * @prop {Organisation} organisation
- *
- * @extends {React.Component<Props>}
- */
 export default class AddHoursScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
+    /** @type {Organisation} */
+    var organisation = navigation.getParam('organisation', {name: 'Unknown'})
     return {
-      title: 'Add Hours'
+      title: 'Add Hours - ' + organisation.name
     }
   }
 
@@ -46,7 +42,7 @@ export default class AddHoursScreen extends React.Component {
 
   async onSave () {
     var newHours = new Hours()
-    newHours.organisation = this.props.organisation
+    newHours.organisation = this.props.navigation.getParam('organisation')
 
     var startTime = new Date(this.state.day.getTime())
     startTime.setHours(this.state.startTime.getHours())
@@ -65,8 +61,8 @@ export default class AddHoursScreen extends React.Component {
 
     await getRepository(Hours).save(newHours)
     alert('Saved')
-    /*this.props.navigation.goBack()
-    this.props.navigation.getParam('reloadList')()*/
+    this.props.navigation.goBack()
+    this.props.navigation.getParam('reloadList')()
   }
 
   render () {
