@@ -9,7 +9,7 @@ export default async function connectDB () {
     location: 'default',
     entities: [ Organisation, Hours ],
     synchronize: true,
-    logging: true,
-    //dropSchema: true
+    logging: true
+    // dropSchema: true
   })
 }

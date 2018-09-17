@@ -28,22 +28,22 @@ export default class HoursCalendar extends React.Component {
     var endMonth = moment(this.state.selectedMonth).endOf('month').toDate()
     var hoursQuery = await getRepository(Hours).createQueryBuilder('hour')
     hoursQuery.leftJoinAndSelect('hour.organisation', 'organisation')
-    hoursQuery.where('hour.startTime > :startMonth AND hour.endTime < :endMonth', {startMonth, endMonth})
+    hoursQuery.where('hour.startTime > :startMonth AND hour.endTime < :endMonth', { startMonth, endMonth })
     var hours = await hoursQuery.getMany()
-    this.setState({hours})
+    this.setState({ hours })
   }
 
   onMonthChange (calendarDate) {
     var newMonth = new Date(calendarDate.timestamp)
-    this.setState({selectedMonth: newMonth}, () => this.loadHours())
+    this.setState({ selectedMonth: newMonth }, () => this.loadHours())
   }
 
   render () {
     var dots = {}
     this.state.hours.forEach(function (hour) {
       var day = moment(hour.startTime).format('YYYY-MM-DD')
-      if (dots[day] === undefined) dots[day] = {dots: []}
-      dots[day].dots.push({color: hour.organisation.colour})
+      if (dots[day] === undefined) dots[day] = { dots: [] }
+      dots[day].dots.push({ color: hour.organisation.colour })
     })
 
     return (

@@ -12,7 +12,7 @@ import { Organisation, Hours } from '../db/tables'
 export default class AddHoursScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     /** @type {Organisation} */
-    var organisation = navigation.getParam('organisation', {name: 'Unknown'})
+    var organisation = navigation.getParam('organisation', { name: 'Unknown' })
     return {
       title: 'Add Hours - ' + organisation.name
     }
@@ -71,22 +71,22 @@ export default class AddHoursScreen extends React.Component {
       <Container>
         <LargeText>Add working hours:</LargeText>
 
-        <DatePicker label='Day' onDatePicked={(day) => this.setState({day})} mode='date' />
-        <DatePicker label='Start Time' onDatePicked={(startTime) => this.setState({startTime})} mode='time' />
-        <DatePicker label='End Time' onDatePicked={(endTime) => this.setState({endTime})} mode='time' />
+        <DatePicker label='Day' onDatePicked={(day) => this.setState({ day })} mode='date' />
+        <DatePicker label='Start Time' onDatePicked={(startTime) => this.setState({ startTime })} mode='time' />
+        <DatePicker label='End Time' onDatePicked={(endTime) => this.setState({ endTime })} mode='time' />
 
-        <View style={{marginTop: 8, marginBottom: 8}}>
+        <View style={{ marginTop: 8, marginBottom: 8 }}>
           <Text>Already paid?</Text>
-          <Switch onValueChange={(isPaid) => this.setState({isPaid})} value={this.state.isPaid} />
+          <Switch onValueChange={(isPaid) => this.setState({ isPaid })} value={this.state.isPaid} />
         </View>
 
-        <TextField label='Hourly Rate' prefix='£' suffix='per hour' onChangeText={(hourlyRate) => this.setState({hourlyRate: parseFloat(hourlyRate)})} keyboardType='numeric' />
-        <TextField label='Hours Unpaid (lunch, etc)' defaultValue={'1'} suffix='hours' onChangeText={(hoursUnpaid) => this.setState({hoursUnpaid: parseFloat(hoursUnpaid)})} keyboardType='numeric' />
-        <TextField label='Work Description (optional)' onChangeText={(workDescription) => this.setState({workDescription})} multiline />
+        <TextField label='Hourly Rate' prefix='£' suffix='per hour' onChangeText={(hourlyRate) => this.setState({ hourlyRate: parseFloat(hourlyRate) })} keyboardType='numeric' />
+        <TextField label='Hours Unpaid (lunch, etc)' defaultValue={'1'} suffix='hours' onChangeText={(hoursUnpaid) => this.setState({ hoursUnpaid: parseFloat(hoursUnpaid) })} keyboardType='numeric' />
+        <TextField label='Work Description (optional)' onChangeText={(workDescription) => this.setState({ workDescription })} multiline />
 
         {validationIssues.length === 0 && <HoursBreakdown isPaid={this.state.isPaid} startTime={this.state.startTime} endTime={this.state.endTime} hourlyRate={this.state.hourlyRate} hoursUnpaid={this.state.hoursUnpaid} />}
         {validationIssues.map(function (issue) {
-          return <Text style={{color: 'red'}} key={validationIssues.indexOf(issue)}>- {issue}</Text>
+          return <Text style={{ color: 'red' }} key={validationIssues.indexOf(issue)}>- {issue}</Text>
         })}
 
         <Button disabled={validationIssues.length !== 0} onPress={this.onSave} title={'Save'} color={this.state.colour} />
@@ -113,8 +113,8 @@ function HoursBreakdown (props) {
   var hours = moment(props.endTime).diff(props.startTime, 'hours', true)
   var paidHours = hours - props.hoursUnpaid
   return (
-    <View style={{alignItems: 'center'}}>
-      <Text style={{fontSize: 20}}>{hours} hours worked</Text>
+    <View style={{ alignItems: 'center' }}>
+      <Text style={{ fontSize: 20 }}>{hours} hours worked</Text>
       <Text><Bold>{paidHours}</Bold> {props.isPaid ? ' has been paid for' : 'due for payment'}</Text>
       <Text>{paidHours} * £{props.hourlyRate.toFixed(2)} = <Bold>£{(paidHours * props.hourlyRate).toFixed(2)}</Bold></Text>
     </View>

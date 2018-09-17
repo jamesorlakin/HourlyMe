@@ -18,7 +18,7 @@ export default class App extends React.Component {
 
   async componentDidMount () {
     await connectDB()
-    this.setState({DBConnected: true})
+    this.setState({ DBConnected: true })
   }
 
   render () {

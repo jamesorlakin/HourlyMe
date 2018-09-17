@@ -18,13 +18,13 @@ import OrganisationStatus from './orgStatus'
 export default class OrganisationItem extends React.Component {
   render () {
     return (
-      <View style={{borderWidth: 2, padding: 4}}>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{height: 24, width: 24, alignSelf: 'center', backgroundColor: this.props.organisation.colour}} />
-          <Text style={{flex: 1, fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginLeft: 8}}>{this.props.organisation.name}</Text>
-          <Button title='Manage' onPress={() => { this.props.navigation.navigate('manage', {organisation: this.props.organisation}) }} />
-          <Button title='Add Hours' onPress={() => { this.props.navigation.navigate('addHours', {organisation: this.props.organisation}) }} />
-          <Button disabled title='Delete' onPress={async () => { await getRepository(Organisation).remove(this.props.organisation); this.props.reloadList() }} />
+      <View style={{ borderWidth: 2, padding: 4 }}>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={{ height: 24, width: 24, alignSelf: 'center', backgroundColor: this.props.organisation.colour }} />
+          <Text style={{ flex: 1, fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginLeft: 8 }}>{this.props.organisation.name}</Text>
+          <Button title='Manage' onPress={() => { this.props.navigation.navigate('manage', { organisation: this.props.organisation }) }} />
+          <Button title='Add Hours' onPress={() => { this.props.navigation.navigate('addHours', { organisation: this.props.organisation }) }} />
+          <Button title='Delete' onPress={async () => { await getRepository(Organisation).remove(this.props.organisation); this.props.reloadList() }} />
         </View>
         <OrganisationStatus organisation={this.props.organisation} />
       </View>

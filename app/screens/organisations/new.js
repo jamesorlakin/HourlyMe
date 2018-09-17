@@ -46,11 +46,11 @@ export default class NewOrganisationScreen extends React.Component {
       <Container>
         <LargeText>Create a new organisation:</LargeText>
 
-        <TextField label='Name' onChangeText={(name) => this.setState({name})} />
-        <TextField label='Telephone' onChangeText={(telephone) => this.setState({telephone})} keyboardType='phone-pad' />
+        <TextField label='Name' onChangeText={(name) => this.setState({ name })} />
+        <TextField label='Telephone' onChangeText={(telephone) => this.setState({ telephone })} keyboardType='phone-pad' />
         <ColorPicker
-          onColorChange={(colour) => this.setState({colour: fromHsv(colour)})}
-          style={{flex: 1, height: 200}}
+          onColorChange={(colour) => this.setState({ colour: fromHsv(colour) })}
+          style={{ flex: 1, height: 200 }}
         />
 
         <Button onPress={this.onSave} title={'Save'} color={this.state.colour} />

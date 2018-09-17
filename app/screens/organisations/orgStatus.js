@@ -21,8 +21,8 @@ export default class OrganisationStatus extends React.Component {
   }
 
   async componentDidMount () {
-    var unpaidHours = await getRepository(Hours).find({organisation: this.props.organisation, isPaid: false})
-    this.setState({unpaidHours, loaded: true})
+    var unpaidHours = await getRepository(Hours).find({ organisation: this.props.organisation, isPaid: false })
+    this.setState({ unpaidHours, loaded: true })
   }
 
   render () {
@@ -38,6 +38,6 @@ export default class OrganisationStatus extends React.Component {
 
 function Italic (props) {
   return (
-    <Text style={{fontStyle: 'italic'}}>{props.children}</Text>
+    <Text style={{ fontStyle: 'italic' }}>{props.children}</Text>
   )
 }

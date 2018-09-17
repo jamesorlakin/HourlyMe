@@ -24,7 +24,7 @@ export default class DatePicker extends React.Component {
   }
 
   onDatePicked (date) {
-    this.setState({open: false, date})
+    this.setState({ open: false, date })
     this.props.onDatePicked(date)
   }
 
@@ -40,15 +40,15 @@ export default class DatePicker extends React.Component {
 
   render () {
     return (
-      <View style={{marginTop: 8, marginBottom: 8}}>
+      <View style={{ marginTop: 8, marginBottom: 8 }}>
         <Text>{this.props.label}:</Text>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{flex: 1, textAlign: 'center', fontSize: 20, marginTop: 5}}>{this.state.date ? this.formatDate() : 'N/A'}</Text>
-          <Button title={'Edit'} onPress={() => { this.setState({open: true}) }} />
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ flex: 1, textAlign: 'center', fontSize: 20, marginTop: 5 }}>{this.state.date ? this.formatDate() : 'N/A'}</Text>
+          <Button title={'Edit'} onPress={() => { this.setState({ open: true }) }} />
         </View>
         <DateTimePicker
           isVisible={this.state.open}
-          onCancel={() => { this.setState({open: false}) }}
+          onCancel={() => { this.setState({ open: false }) }}
           onConfirm={this.onDatePicked}
           mode={this.props.mode}
         />

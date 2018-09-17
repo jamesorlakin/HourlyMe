@@ -14,9 +14,9 @@ export default class HomeScreen extends React.Component {
     return {
       title: 'Hourly Me',
       headerRight: (
-        <View style={{marginRight: 10}}>
+        <View style={{ marginRight: 10 }}>
           <Button
-            onPress={() => { navigation.navigate('new', {reloadList: navigation.getParam('reloadList')}) }}
+            onPress={() => { navigation.navigate('new', { reloadList: navigation.getParam('reloadList') }) }}
             title='+'
             color='#000'
           />
@@ -36,12 +36,12 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount () {
     this.loadOrganisations()
-    this.props.navigation.setParams({reloadList: this.loadOrganisations})
+    this.props.navigation.setParams({ reloadList: this.loadOrganisations })
   }
 
   async loadOrganisations () {
     var organisations = await getRepository(Organisation).find()
-    this.setState({organisations})
+    this.setState({ organisations })
   }
 
   render () {
@@ -53,7 +53,7 @@ export default class HomeScreen extends React.Component {
         {this.state.organisations.map(function (org) {
           return <Item key={org.id} organisation={org} reloadList={reloadList} navigation={navigation} />
         })}
-        {this.state.organisations.length === 0 && <LargeText style={{textAlign: 'center'}}>No organisations!</LargeText>}
+        {this.state.organisations.length === 0 && <LargeText style={{ textAlign: 'center' }}>No organisations!</LargeText>}
         <HoursCalendar />
       </Container>
     )

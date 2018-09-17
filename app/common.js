@@ -4,7 +4,7 @@ import { ScrollView, Text, View } from 'react-native'
 export function Container (props) {
   return (
     <ScrollView>
-      <View style={{margin: 4, padding: 8, flex: 1, borderColor: 'gray', borderWidth: 2}} >
+      <View style={{ margin: 4, padding: 8, flex: 1, borderColor: 'gray', borderWidth: 2 }} >
         {props.children}
       </View>
     </ScrollView>
@@ -13,7 +13,7 @@ export function Container (props) {
 
 export function LargeText (props) {
   return (
-    <Text style={{fontSize: 18, ...props.style}}>
+    <Text style={{ fontSize: 18, ...props.style }}>
       {props.children}
     </Text>
   )
@@ -21,7 +21,7 @@ export function LargeText (props) {
 
 export function Bold (props) {
   return (
-    <Text style={{fontWeight: 'bold'}}>
+    <Text style={{ fontWeight: 'bold' }}>
       {props.children}
     </Text>
   )

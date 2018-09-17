@@ -8,7 +8,7 @@ import { Organisation, Hours } from '../db/tables'
 export default class OrgManagementScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     /** @type {Organisation} */
-    var organisation = navigation.getParam('organisation', {name: 'Unknown'})
+    var organisation = navigation.getParam('organisation', { name: 'Unknown' })
     return {
       title: organisation.name
     }
