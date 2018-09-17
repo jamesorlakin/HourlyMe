@@ -22,8 +22,8 @@ export default class OrganisationItem extends React.Component {
         <View style={{ flexDirection: 'row' }}>
           <View style={{ height: 24, width: 24, alignSelf: 'center', backgroundColor: this.props.organisation.colour }} />
           <Text style={{ flex: 1, fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginLeft: 8 }}>{this.props.organisation.name}</Text>
-          <Button title='Manage' onPress={() => { this.props.navigation.navigate('manage', { organisation: this.props.organisation }) }} />
-          <Button title='Add Hours' onPress={() => { this.props.navigation.navigate('addHours', { organisation: this.props.organisation }) }} />
+          <Button title='Manage' onPress={() => { this.props.navigation.navigate('manage', { organisation: this.props.organisation, reloadList: this.props.reloadList }) }} />
+          <Button title='Add Hours' onPress={() => { this.props.navigation.navigate('addHours', { organisation: this.props.organisation, reloadList: this.props.reloadList }) }} />
           <Button title='Delete' onPress={async () => { await getRepository(Organisation).remove(this.props.organisation); this.props.reloadList() }} />
         </View>
         <OrganisationStatus organisation={this.props.organisation} />

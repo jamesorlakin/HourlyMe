@@ -20,13 +20,19 @@ export default class AddHoursScreen extends React.Component {
 
   constructor (props) {
     super(props)
+
+    var startTime = new Date()
+    startTime.setHours(9, 0)
+
+    var endTime = new Date()
+    endTime.setHours(17, 0)
     this.state = {
       /** @type {Date} */
       day: new Date(),
       /** @type {Date} */
-      startTime: undefined,
+      startTime,
       /** @type {Date} */
-      endTime: undefined,
+      endTime,
       /** @type {string} */
       workDescription: '',
       /** @type {number} */
@@ -47,10 +53,12 @@ export default class AddHoursScreen extends React.Component {
     var startTime = new Date(this.state.day.getTime())
     startTime.setHours(this.state.startTime.getHours())
     startTime.setMinutes(this.state.startTime.getMinutes())
+    startTime.setSeconds(0)
 
     var endTime = new Date(this.state.day.getTime())
     endTime.setHours(this.state.endTime.getHours())
     endTime.setMinutes(this.state.endTime.getMinutes())
+    endTime.setSeconds(0)
 
     newHours.workDescription = this.state.workDescription
     newHours.startTime = startTime
@@ -72,8 +80,8 @@ export default class AddHoursScreen extends React.Component {
         <LargeText>Add working hours:</LargeText>
 
         <DatePicker label='Day' onDatePicked={(day) => this.setState({ day })} mode='date' />
-        <DatePicker label='Start Time' onDatePicked={(startTime) => this.setState({ startTime })} mode='time' />
-        <DatePicker label='End Time' onDatePicked={(endTime) => this.setState({ endTime })} mode='time' />
+        <DatePicker label='Start Time' defaultDate={this.state.startTime} onDatePicked={(startTime) => this.setState({ startTime })} mode='time' />
+        <DatePicker label='End Time' defaultDate={this.state.endTime} onDatePicked={(endTime) => this.setState({ endTime })} mode='time' />
 
         <View style={{ marginTop: 8, marginBottom: 8 }}>
           <Text>Already paid?</Text>
@@ -97,8 +105,6 @@ export default class AddHoursScreen extends React.Component {
 
   validate () {
     var issues = []
-    if (this.state.startTime === undefined) issues.push('Start time not chosen')
-    if (this.state.endTime === undefined) issues.push('End time not chosen')
     if (this.state.startTime > this.state.endTime) issues.push('End cannot be before start!')
     if (this.state.hourlyRate === undefined) issues.push('Hourly rate has not been configured')
     if (this.state.hoursUnpaid < 0) issues.push('Unpaid hours cannot be negative')

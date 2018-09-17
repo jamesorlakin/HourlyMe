@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 
 import { Calendar } from 'react-native-calendars'
+import CalendarSelectedDay from './calendarSelectedDay'
 import moment from 'moment'
 
 import { getRepository } from 'typeorm/browser'
@@ -13,7 +14,8 @@ export default class HoursCalendar extends React.Component {
     this.state = {
       /** @type {Hours[]} */
       hours: [],
-      selectedMonth: new Date()
+      selectedMonth: new Date(),
+      selectedDay: new Date()
     }
     this.loadHours = this.loadHours.bind(this)
     this.onMonthChange = this.onMonthChange.bind(this)
@@ -39,21 +41,36 @@ export default class HoursCalendar extends React.Component {
   }
 
   render () {
-    var dots = {}
+    /**
+     * Generate an object in this format based on the month's hours for each day:
+     * markedDates = {
+     *  '2012-05-16': { dots: [{color: '#FFBBFF'}] },
+     *  ...
+     * }}
+     */
+    var markedDates = {}
     this.state.hours.forEach(function (hour) {
       var day = moment(hour.startTime).format('YYYY-MM-DD')
-      if (dots[day] === undefined) dots[day] = { dots: [] }
-      dots[day].dots.push({ color: hour.organisation.colour })
+      if (markedDates[day] === undefined) markedDates[day] = { dots: [] }
+      markedDates[day].dots.push({ color: hour.organisation.colour })
     })
+
+    // Mark the selected day with a circle.
+    // If the day already has a mark (such as through a dot), reuse that object.
+    var selectedDay = moment(this.state.selectedDay).format('YYYY-MM-DD')
+    markedDates[selectedDay] === undefined ? markedDates[selectedDay] = { selected: true } : markedDates[selectedDay].selected = true
 
     return (
       <View>
         <Calendar
           markingType='multi-dot'
-          markedDates={dots}
-          onDayPress={console.log}
+          markedDates={markedDates}
+          onDayPress={(calendarDate) => { this.setState({ selectedDay: new Date(calendarDate.timestamp) }) }}
           onMonthChange={this.onMonthChange}
+          firstDay={1}
+          showWeekNumbers
         />
+        <CalendarSelectedDay selectedDay={this.state.selectedDay} key={this.state.selectedDay.getDate()} />
       </View>
     )
   }
