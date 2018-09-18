@@ -42,13 +42,14 @@ export default class CalendarSelectedDay extends React.Component {
     var totalDue = 0
     var totalPaid = 0
     return (
-      <View style={{ flex: 1, borderWidth: 2 }}>
+      <View style={{ flex: 1, borderWidth: 2, padding: 2 }}>
         <Text style={{ fontSize: 20 }}>{moment(this.props.selectedDay).format('DD MM YYYY')}:</Text>
         {this.state.hours.map(function (hours) {
           totalDue += hours.calculatePayment()
           if (hours.isPaid) totalPaid += hours.calculatePayment()
           return <CalendarHoursItem key={hours.id} hours={hours} />
         })}
+        {this.state.hours.length === 0 && <Text style={{ textAlign: 'center', fontSize: 16 }}>No hours entered.</Text>}
         <Text>Total due: £{totalDue.toFixed(2)}</Text>
         <Text>Total paid: £{totalPaid.toFixed(2)}</Text>
       </View>
