@@ -19,6 +19,10 @@ export class Organisation {
   @Column('varchar')
   telephone = undefined
 
+  /** @type {string} */
+  @Column('text', { nullable: true })
+  invoiceTemplate = undefined
+
   /** @type {Hours[]} */
   @OneToMany(() => Hours, hours => hours.organisation)
   hours = undefined
@@ -37,7 +41,7 @@ export class Hours {
 
   /** @type {string} */
   @Column('varchar')
-  workDescription = ''
+  workDescription = undefined
 
   /** @type {Date} */
   @Column('datetime')
@@ -72,4 +76,19 @@ export class Hours {
     var paidHours = this.calculatePaidHours()
     return paidHours * this.hourlyRate
   }
+}
+
+@Entity('invoice')
+export class Invoice {
+  /** @type {number} */
+  @PrimaryGeneratedColumn()
+  id = undefined
+
+  /** @type {string} @description 'Base 64' */
+  @Column('text')
+  exportedDocument = undefined
+
+  /** @type {Date} */
+  @Column('datetime')
+  exportedDate = undefined
 }

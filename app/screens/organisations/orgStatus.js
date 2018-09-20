@@ -32,7 +32,7 @@ export default class OrganisationStatus extends React.Component {
       hoursDue += hour.calculatePaidHours()
       paymentDue += hour.calculatePayment()
     })
-    return hoursDue === 0 ? <Italic>No hours due.</Italic> : <Italic>{hoursDue} hours unpaid, totalling £{paymentDue.toFixed(2)}.</Italic>
+    return hoursDue === 0 ? <Italic>No hours due.</Italic> : <Italic>{hoursDue.toFixed(1)} hours unpaid, totalling £{paymentDue.toFixed(2)}.</Italic>
   }
 }
 

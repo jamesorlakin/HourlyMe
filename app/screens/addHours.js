@@ -22,10 +22,10 @@ export default class AddHoursScreen extends React.Component {
     super(props)
 
     var startTime = new Date()
-    startTime.setHours(9, 0)
+    startTime.setHours(9, 0, 0)
 
     var endTime = new Date()
-    endTime.setHours(17, 0)
+    endTime.setHours(17, 0, 0)
     this.state = {
       /** @type {Date} */
       day: new Date(),
@@ -52,13 +52,11 @@ export default class AddHoursScreen extends React.Component {
 
     var startTime = new Date(this.state.day.getTime())
     startTime.setHours(this.state.startTime.getHours())
-    startTime.setMinutes(this.state.startTime.getMinutes())
-    startTime.setSeconds(0)
+    startTime.setMinutes(this.state.startTime.getMinutes(), 0, 0)
 
     var endTime = new Date(this.state.day.getTime())
     endTime.setHours(this.state.endTime.getHours())
-    endTime.setMinutes(this.state.endTime.getMinutes())
-    endTime.setSeconds(0)
+    endTime.setMinutes(this.state.endTime.getMinutes(), 0, 0)
 
     newHours.workDescription = this.state.workDescription
     newHours.startTime = startTime
@@ -79,7 +77,7 @@ export default class AddHoursScreen extends React.Component {
       <Container>
         <LargeText>Add working hours:</LargeText>
 
-        <DatePicker label='Day' onDatePicked={(day) => this.setState({ day })} mode='date' />
+        <DatePicker label='Day' defaultDate={this.state.day} onDatePicked={(day) => this.setState({ day })} mode='date' />
         <DatePicker label='Start Time' defaultDate={this.state.startTime} onDatePicked={(startTime) => this.setState({ startTime })} mode='time' />
         <DatePicker label='End Time' defaultDate={this.state.endTime} onDatePicked={(endTime) => this.setState({ endTime })} mode='time' />
 

@@ -2,6 +2,9 @@ import React from 'react'
 import { View, Text, Button } from 'react-native'
 import { Container } from '../common'
 
+import Exporter from './exporter'
+import TemplateSelector from './templateSelector'
+
 import { getRepository } from 'typeorm/browser'
 import { Organisation, Hours } from '../db/tables'
 
@@ -26,7 +29,8 @@ export default class OrgManagementScreen extends React.Component {
     var organisation = this.props.navigation.getParam('organisation')
     return (
       <Container>
-        <Text>{JSON.stringify(this.props)}</Text>
+        <Exporter organisation={organisation} />
+        <TemplateSelector organisation={organisation} />
       </Container>
     )
   }

@@ -21,12 +21,15 @@
     "react-native-sqlite-storage": "git+https://github.com/jamesorlakin/react-native-sqlite-storage.git",
     "react-navigation": "^2.11.2",
     "reflect-metadata": "^0.1.12",
+    "rn-fetch-blob": "^0.10.13",
     "typeorm": "^0.2.7"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-jest": "23.4.2",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react-native": "4.0.0",
+    "babel-preset-stage-3": "^6.24.1",
     "jest": "23.4.2",
     "react-test-renderer": "16.3.1"
   },

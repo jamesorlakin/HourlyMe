@@ -1,0 +1,1 @@
+Uses https://github.com/gabrielberlanda/typeorm/commit/27cb38e33c6f254b38ff4ede94fe22656a84f12d to patch typeORM Object.assign Alias bug.
