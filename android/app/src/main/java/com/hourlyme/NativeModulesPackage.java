@@ -22,6 +22,7 @@ public class NativeModulesPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new NativeFilePickerModule(reactContext));
+        modules.add(new NativeFileSaverModule(reactContext));
         return modules;
     }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, PermissionsAndroid } from 'react-native'
+import { View, Text, Button, PermissionsAndroid, NativeModules } from 'react-native'
 
 import JSZip from 'jszip'
 import DOCX from 'docxtemplater'
@@ -39,7 +39,11 @@ export default class HoursExport extends React.Component {
     })
     doc.render()
     var exportedDoc = doc.getZip().generate({ type: 'base64' })
-    RNFetchBlob.fs.writeFile('/sdcard/invoice.docx', exportedDoc, 'base64')
+    var location = await NativeModules.FileSaver.pickSaveLocation()
+    console.log(location)
+    // TODO: The file saver returns a content URI. I need an actual path.
+    location = '/sdcard/Invoice.docx'
+    RNFetchBlob.fs.writeFile(location, exportedDoc, 'base64')
   }
 
   async grantStoragePermission () {
