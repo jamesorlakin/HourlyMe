@@ -1,0 +1,26 @@
+patch-package
+--- a/node_modules/react-native-sqlite-storage/lib/sqlite.core.js
++++ b/node_modules/react-native-sqlite-storage/lib/sqlite.core.js
+@@ -491,8 +491,11 @@ SQLitePluginTransaction.prototype.addStatement = function(sql, values, success,
+       } else if (t === 'boolean') {
+         //Convert true -> 1 / false -> 0
+         params.push(~~v);
+-      }
+-      else if (t !== 'function') {
++      } else if (v instanceof Date) {
++        //A Date is of type 'object', but can be handled directly as is.
++        //Converting to a string like with other objects is not what we want.
++        params.push(v)
++      } else if (t !== 'function') {
+         params.push(v.toString());
+         console.warn('addStatement - parameter of type <'+t+'> converted to string using toString()')
+       } else {
+--- a/node_modules/react-native-sqlite-storage/src/android/build.gradle
++++ b/node_modules/react-native-sqlite-storage/src/android/build.gradle
+@@ -34,5 +34,5 @@ repositories {
+ }
+ 
+ dependencies {
+-    compile 'com.facebook.react:react-native:0.14.+'
++    implementation 'com.facebook.react:react-native:0.14.+'
+ }
