@@ -24,7 +24,8 @@ export default class TemplateSelector extends React.Component {
 
     var organisation = this.props.organisation
     organisation.invoiceTemplate = template
-    getRepository(Organisation).save(organisation).then(console.log)
+    await getRepository(Organisation).save(organisation)
+    this.setState({ templateChanged: true })
   }
 
   render () {

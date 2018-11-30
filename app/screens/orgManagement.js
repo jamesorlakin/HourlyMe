@@ -29,6 +29,7 @@ export default class OrgManagementScreen extends React.Component {
     var organisation = this.props.navigation.getParam('organisation')
     return (
       <Container>
+        <Button title='Location' onPress={() => { this.props.navigation.push('locationPicker', { organisation }) }} />
         <Exporter organisation={organisation} />
         <TemplateSelector organisation={organisation} />
       </Container>

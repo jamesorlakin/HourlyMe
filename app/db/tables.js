@@ -16,8 +16,20 @@ export class Organisation {
   colour = undefined
 
   /** @type {string} */
-  @Column('varchar')
+  @Column('varchar', { nullable: true })
   telephone = undefined
+
+  /** @type {number} */
+  @Column('real', { nullable: true })
+  latitude = undefined
+
+  /** @type {number} */
+  @Column('real', { nullable: true })
+  longitude = undefined
+
+  /** @type {number} */
+  @Column('integer', { nullable: true })
+  locationRadius = undefined
 
   /** @type {string} */
   @Column('text', { nullable: true })

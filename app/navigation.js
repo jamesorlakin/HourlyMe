@@ -4,6 +4,7 @@ import HomeScreen from './screens/home'
 import OrgManagementScreen from './screens/orgManagement'
 import NewOrganisationScreen from './screens/organisations/new'
 import AddHoursScreen from './screens/addHours'
+import LocationPicker from './screens/locationPicker'
 
 export default createStackNavigator({
   home: {
@@ -17,5 +18,8 @@ export default createStackNavigator({
   },
   new: {
     screen: NewOrganisationScreen
+  },
+  locationPicker: {
+    screen: LocationPicker
   }
 })

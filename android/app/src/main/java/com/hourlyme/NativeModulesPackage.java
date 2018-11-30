@@ -23,6 +23,7 @@ public class NativeModulesPackage implements ReactPackage {
 
         modules.add(new NativeFilePickerModule(reactContext));
         modules.add(new NativeFileSaverModule(reactContext));
+        modules.add(new NativeGeofenceSetterModule(reactContext));
         return modules;
     }
 
